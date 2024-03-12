@@ -19,6 +19,20 @@ describe('GET /', () => {
                 );
             });
     });
+    it('POST / => Convert', () => {
+        return (
+            request(app)
+                .post('/total')
+                .send({
+                    values: '1,2',
+                })
+                .expect('Content-Type', /json/)
+                .then((response) => {
+                    expect(response.body).toEqual(225);
+                })
+        );
+    });
+
 
     /*     it('GET / => items by ID', () => {
             return request(app)
