@@ -1,13 +1,10 @@
 function total(numbers) {
-  var result = 0;
-  var parts = numbers.split(",");
-  for (var i = 0; i < parts.length; i++) {
-    var integer = parseInt(parts[i]);
-    if (checkIfInteger(integer) && checkIsAnIntegerIsInAValidRange(integer)) {
-      result += integer;
-    }
-  }
-  return result;
+  return numbers
+    .split(",")
+    .map((part) => parseInt(part))
+    .filter(checkIfInteger)
+    .filter(checkIsAnIntegerIsInAValidRange)
+    .reduce((acc, curr) => acc + curr, 0);
 }
 
 const checkIsAnIntegerIsInAValidRange = (integer) => {
