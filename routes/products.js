@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const createError = require('http-errors');
 const total = require('../total')
+const convert = require('../convert')
 
 // Products Array
 const products = [{ id: '1', name: 'Playstation 5', inStock: false }];
@@ -9,6 +10,7 @@ const products = [{ id: '1', name: 'Playstation 5', inStock: false }];
 router.get('/', (req, res) => {
     console.log("Get all products");
     console.log("All products " + products.length);
+    console.log("Before return");
     res.json(products);
 });
 
@@ -22,6 +24,7 @@ router.get('/:id', (req, res, next) => {
         console.log("Found nothing");
         return next(createError(404, 'Not Found'));
     }
+    console.log("Before return");
     res.json(product);
 });
 
@@ -35,6 +38,7 @@ router.post('/', (req, res, next) => {
     var newId = products.length + 1;
     const newProduct = { id: "'" + newId + "'", name: body.name, inStock: false, };
     products.push(newProduct);
+    console.log("Before return");
     res.status(201).json(newProduct);
 });
 
@@ -45,7 +49,9 @@ router.post('/total', (req, res) => {
     console.log("values " + values);
     var result = total(values);
     console.log("total " + result);
-    res.json(result);
+    var convertResult = convert(result);
+    console.log("Before return");
+    res.json(convertResult);
 });
 
 module.exports = router;
