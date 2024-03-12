@@ -32,12 +32,4 @@ router.post("/", (req, res, next) => {
   res.status(201).json(newProduct);
 });
 
-router.post("/total", (req, res) => {
-  const { body } = req;
-  var values = body.values;
-  var result = total(values);
-  var convertResult = convert(result);
-  res.json(convertResult);
-});
-
 module.exports = router;
